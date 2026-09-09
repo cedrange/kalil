@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Property {
+  id              Int              @id @default(autoincrement())
+  title           String
+  slug            String           @unique
+  type            String
+  transactionType String           @default("vente")
+  status          String           @default("disponible")
+  price           Int
+  currency        String           @default("GNF")
+  city            String
+  neighborhood    String?
+  surface         Int?
+  bedrooms        Int?
+  bathrooms       Int?
+  description     String
+  featured        Boolean          @default(false)
+  images          PropertyImage[]
+  contacts        ContactMessage[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+model PropertyImage {
+  id         Int      @id @default(autoincrement())
+  url        String
+  position   Int      @default(0)
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  propertyId Int
+}
+
+model BlogPost {
+  id         Int      @id @default(autoincrement())
+  title      String
+  slug       String   @unique
+  excerpt    String?
+  content    String
+  coverImage String?
+  published  Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model ContactMessage {
+  id         Int       @id @default(autoincrement())
+  name       String
+  email      String
+  phone      String?
+  country    String?
+  message    String
+  status     String    @default("nouveau")
+  property   Property? @relation(fields: [propertyId], references: [id], onDelete: SetNull)
+  propertyId Int?
+  createdAt  DateTime  @default(now())
+}
