@@ -75,7 +75,6 @@ export default function PropertyCard({ property }) {
           )}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()}
           className="relative z-20 mt-3 inline-flex items-center justify-center gap-2 rounded-md border border-[#25D366] px-3 py-2 text-sm font-semibold text-[#1DA851] transition hover:bg-[#25D366] hover:text-white"
         >
           <WhatsAppIcon className="h-4 w-4" />

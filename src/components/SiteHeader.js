@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { whatsappLink } from "@/lib/constants";
+import MobileMenu from "@/components/MobileMenu";
 
 const links = [
   { href: "/", label: "Accueil" },
@@ -12,7 +13,7 @@ const links = [
 export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-paper/95 backdrop-blur">
-      <div className="container-page flex h-16 items-center justify-between">
+      <div className="container-page relative flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <span className="flex h-9 w-9 items-center justify-center rounded-md bg-primary text-sm font-bold text-white">
             KI
@@ -43,20 +44,10 @@ export default function SiteHeader() {
           >
             Nous contacter
           </a>
+
+          <MobileMenu links={links} />
         </div>
       </div>
-
-      <nav className="flex items-center gap-5 overflow-x-auto border-t border-border px-4 py-2 md:hidden">
-        {links.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className="shrink-0 text-sm font-medium text-ink-soft hover:text-primary"
-          >
-            {link.label}
-          </Link>
-        ))}
-      </nav>
     </header>
   );
 }
