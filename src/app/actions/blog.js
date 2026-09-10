@@ -60,6 +60,7 @@ export async function createPost(prevState, formData) {
 
   revalidatePath("/dashboard/blog");
   revalidatePath("/blog");
+  revalidatePath("/");
   redirect(`/dashboard/blog/${post.id}/edit`);
 }
 
@@ -89,6 +90,7 @@ export async function updatePost(id, prevState, formData) {
   revalidatePath("/dashboard/blog");
   revalidatePath("/blog");
   revalidatePath(`/blog/${existing.slug}`);
+  revalidatePath("/");
 
   return { error: null, success: true };
 }
@@ -98,5 +100,6 @@ export async function deletePost(id) {
   await prisma.blogPost.delete({ where: { id } });
   revalidatePath("/dashboard/blog");
   revalidatePath("/blog");
+  revalidatePath("/");
   redirect("/dashboard/blog");
 }

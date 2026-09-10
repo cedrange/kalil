@@ -74,6 +74,7 @@ export async function createProperty(prevState, formData) {
 
   revalidatePath("/dashboard/properties");
   revalidatePath("/showroom");
+  revalidatePath("/");
   redirect(`/dashboard/properties/${property.id}/edit`);
 }
 
@@ -121,6 +122,7 @@ export async function updateProperty(id, prevState, formData) {
   revalidatePath("/dashboard/properties");
   revalidatePath("/showroom");
   revalidatePath(`/showroom/${existing.slug}`);
+  revalidatePath("/");
 
   return { error: null, success: true };
 }
@@ -130,5 +132,6 @@ export async function deleteProperty(id) {
   await prisma.property.delete({ where: { id } });
   revalidatePath("/dashboard/properties");
   revalidatePath("/showroom");
+  revalidatePath("/");
   redirect("/dashboard/properties");
 }
