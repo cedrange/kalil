@@ -61,3 +61,4 @@ model ContactMessage {
   propertyId Int?
   createdAt  DateTime  @default(now())
 }
+
